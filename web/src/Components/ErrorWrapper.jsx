@@ -1,11 +1,10 @@
 import * as React from "react"
 
-export const Render = ({ comp, data }) => {
-
-  return <div> { comp(data) } </div>
+export const InnerWrapper = ({ comp, data }) => {
+  return comp(data)
 }
 
-export default class DynamicWrapper extends React.Component {
+export default class OutterWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -31,4 +30,8 @@ export default class DynamicWrapper extends React.Component {
 
     return this.props.children; 
   }
+}
+
+export const withWrapper = (Comp, data) =>{
+  return <OutterWrapper><InnerWrapper comp={Comp} data={data}/></OutterWrapper>
 }

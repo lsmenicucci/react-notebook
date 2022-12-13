@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Editor from "@monaco-editor/react";
 import vm from "vm-browserify"
 
-import DynamicWrapper, { Render } from "../Components/DynamicWrapper";
+import { withWrapper } from "../Components/ErrorWrapper";
 
 const DynamicComponent = ({ url, data }) => {
 	const [Comp, setComp] = useState(null)
@@ -25,7 +25,7 @@ const DynamicComponent = ({ url, data }) => {
 
 	}, [url])
 
-	return url && Comp && Comp.default && <DynamicWrapper><Render comp={Comp.default} data={{ data }}/></DynamicWrapper>
+	return url && Comp && Comp.default && withWrapper(Comp.default, data)
 
 }
 
